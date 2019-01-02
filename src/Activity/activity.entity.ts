@@ -1,55 +1,67 @@
 import { Entity, Column, PrimaryGeneratedColumn, Generated } from 'typeorm';
 
-@Entity()
+@Entity({ schema: 'sevenm', name: 'activities' })
 export class Activity {
   @PrimaryGeneratedColumn()
   @Generated('uuid')
   id: string;
 
-  @Column()
+  @Column('text', { name: 'activityname' })
   activityName: string;
 
   @Column('text')
   description: string;
 
-  @Column()
+  @Column('numeric')
   stars: number;
 
-  @Column('text')
-  thumburl: string;
+  @Column('text', { name: 'thumburl' })
+  thumbUrl: string;
 
-  @Column('int')
-  minchildage: number;
+  @Column('int', { name: 'minchildage' })
+  minchildAge: number;
 
-  @Column('int')
-  maxchildage: number;
+  @Column('int', { name: 'maxchildage' })
+  maxChildAge: number;
 
-  @Column('time without time zone')
-  createdat: Date;
+  @Column('date', {
+    name: 'createdat',
+    default: () => 'now()',
+  })
+  createdAt: string;
 
-  @Column('time without time zone')
-  modifiedat: Date;
+  @Column('date', {
+    name: 'modifiedat',
+    default: () => 'now()',
+  })
+  modifiedAt: string;
 
-  @Column()
+  @Column({
+    name: 'createdby',
+    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+  })
   @Generated('uuid')
-  createdby: string;
+  createdBy: string;
 
-  @Column()
+  @Column({
+    name: 'modifiedby',
+    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+  })
   @Generated('uuid')
-  modifiedby: string;
+  modifiedBy: string;
 
-  @Column()
-  isactive: boolean;
+  @Column({ name: 'isactive', default: true })
+  isActive: boolean;
 
-  @Column('int')
-  destinationid: number;
+  @Column('int', { name: 'destinationid' })
+  destinationId: number;
 
-  @Column('int')
-  categoryid: number;
+  @Column('int', { name: 'categoryid' })
+  categoryId: number;
 
-  @Column('int')
-  activityid: number;
+  @Column('int', { name: 'activityid' })
+  activityId: number;
 
-  @Column('int')
-  optionid: number;
+  @Column('int', { name: 'optionid' })
+  optionId: number;
 }

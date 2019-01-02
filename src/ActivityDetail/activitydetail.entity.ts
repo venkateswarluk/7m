@@ -1,22 +1,22 @@
 import { Entity, Column, PrimaryGeneratedColumn, Generated } from 'typeorm';
 
-@Entity()
+@Entity({ schema: 'sevenm', name: 'activitydetails' })
 export class ActivityDetail {
   @PrimaryGeneratedColumn()
   @Generated('uuid')
   id: string;
 
-  @Column('int')
-  activitydetailid: number;
+  @Column('int', { name: 'activitydetailid' })
+  activityDetailId: number;
 
-  @Column('int')
-  activityid: number;
+  @Column('int', { name: 'activityid' })
+  activityId: number;
 
-  @Column('text')
-  shortdescription: string;
+  @Column('text', { name: 'shortdescription' })
+  shortDescription: string;
 
-  @Column('text')
-  longdescription: string;
+  @Column('text', { name: 'longdescription' })
+  longDescription: string;
 
   @Column('text', { array: true })
   images: string[];
@@ -24,23 +24,34 @@ export class ActivityDetail {
   @Column('text', { array: true })
   videos: string[];
 
-  @Column('time without time zone')
-  createdat: Date;
+  @Column('date', {
+    name: 'createdat',
+    default: () => 'now()',
+  })
+  createdAt: string;
 
-  @Column('time without time zone')
-  modifiedat: Date;
+  @Column('date', {
+    name: 'modifiedat',
+    default: () => 'now()',
+  })
+  modifiedAt: string;
 
-  @Column()
+  @Column({
+    name: 'createdby',
+    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+  })
   @Generated('uuid')
-  createdby: string;
+  createdBy: string;
 
-  @Column()
+  @Column({
+    name: 'modifiedby',
+    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+  })
   @Generated('uuid')
-  modifiedby: string;
+  modifiedBy: string;
 
-  @Column()
-  isactive: boolean;
-
-  @Column('text')
-  activityphone: string;
+  @Column({ name: 'isactive', default: true })
+  isActive: boolean;
+  @Column('text', { name: 'activityphone' })
+  activityPhone: string;
 }

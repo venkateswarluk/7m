@@ -7,11 +7,25 @@ import { OptionAvailability } from '../OptionAvailability/optionavailability.ent
 export class OptionAvailabilityService {
   constructor(
     @InjectRepository(OptionAvailability)
-    private readonly activityRepository: Repository<OptionAvailability>,
+    private readonly availabilityRepository: Repository<OptionAvailability>,
   ) {}
 
   async createOptionAvailability(ActivityObj: OptionAvailability) {
     console.log(ActivityObj);
-    return await this.activityRepository.save(ActivityObj);
+    const getMaxIds = await this.availabilityRepository.query(
+      `select Max(optionAvailabilityId) as optionAvailabilityId,
+      Max(activityId) as activityId,
+      Max(optionId) as optionId from sevenm.optionavailabilities`,
+    );
+    const [act] = getMaxIds;
+    const optionAvailability = {
+      ...ActivityObj,
+      optionAvailabilityId: act.optionavailabilityid
+        ? act.optionavailabilityid + 1
+        : 1,
+      optionId: act.optionid ? act.optionid + 1 : 1,
+      activityId: act.activityid ? act.activityid + 1 : 1,
+    };
+    return await this.availabilityRepository.save(optionAvailability);
   }
 }

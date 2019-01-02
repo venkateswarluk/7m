@@ -10,8 +10,16 @@ export class ActivityCategoryService {
     private readonly categoryRepository: Repository<ActivityCategory>,
   ) {}
 
-  async createCategory(ActivityObj: ActivityCategory) {
-    console.log(ActivityObj);
-    return await this.categoryRepository.save(ActivityObj);
+  async createCategory(categoryObj: ActivityCategory) {
+    const getMaxId = await this.categoryRepository.query(
+      `select Max(categoryid) as categoryId from sevenm.activitycategories`,
+    );
+    const [maxCat] = getMaxId;
+    const category = {
+      ...categoryObj,
+      categoryId: maxCat.categoryid ? maxCat.categoryid : 1,
+    };
+
+    return await this.categoryRepository.save(category);
   }
 }

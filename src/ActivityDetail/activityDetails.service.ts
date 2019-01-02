@@ -7,11 +7,22 @@ import { ActivityDetail } from '../ActivityDetail/activitydetail.entity';
 export class ActivityDetailService {
   constructor(
     @InjectRepository(ActivityDetail)
-    private readonly activityRepository: Repository<ActivityDetail>,
+    private readonly detailRepository: Repository<ActivityDetail>,
   ) {}
 
   async createActivityDetail(ActivityObj: ActivityDetail) {
     console.log(ActivityObj);
-    return await this.activityRepository.save(ActivityObj);
+
+    const getMaxIds = await this.detailRepository.query(
+      `select Max(activityDetailId) as detailId,Max(activityId) as activityId from sevenm.activitydetails`,
+    );
+    const [act] = getMaxIds;
+    const activityDetail = {
+      ...ActivityObj,
+      activityDetailId: act.activitydetailid ? act.activitydetailid + 1 : 1,
+      activityId: act.activityid ? act.activityid + 1 : 1,
+    };
+
+    return await this.detailRepository.save(activityDetail);
   }
 }

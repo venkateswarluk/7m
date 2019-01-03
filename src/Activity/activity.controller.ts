@@ -41,9 +41,9 @@ export class ActivityController {
     const a = await this.activityService.createActivity(
       createActivityCategory.activity,
     );
-    const c = await this.activityCategoryService.createCategory(
-      createActivityCategory.category,
-    );
+    // const c = await this.activityCategoryService.createCategory(
+    //   createActivityCategory.category,
+    // );
     const d = await this.activityDetailService.createActivityDetail(
       createActivityCategory.details,
     );

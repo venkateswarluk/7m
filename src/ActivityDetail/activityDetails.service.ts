@@ -17,9 +17,10 @@ export class ActivityDetailService {
       `select Max(activityDetailId) as detailId,Max(activityId) as activityId from sevenm.activitydetails`,
     );
     const [act] = getMaxIds;
+    console.log(act);
     const activityDetail = {
       ...ActivityObj,
-      activityDetailId: act.activitydetailid ? act.activitydetailid + 1 : 1,
+      activityDetailId: act.detailid ? act.detailid + 1 : 1,
       activityId: act.activityid ? act.activityid + 1 : 1,
     };
 

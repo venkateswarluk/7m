@@ -11,7 +11,7 @@ export class User {
 
   @Column('text') password: string;
 
-  @Column('text', { name: 'emailconfirmed' }) emailConfirmed: string;
+  @Column({ name: 'emailconfirmed' }) emailConfirmed: boolean;
 
   @Column('text') roles: string[];
 
@@ -27,19 +27,17 @@ export class User {
   })
   modifiedAt: string;
 
-  @Column({
+  @Column('int', {
     name: 'createdoperatorid',
-    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+    default: 1,
   })
-  @Generated('uuid')
-  createdBy: string;
+  createdBy: number;
 
-  @Column({
+  @Column('int', {
     name: 'modifiedoperatorid',
-    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+    default: 1,
   })
-  @Generated('uuid')
-  modifiedBy: string;
+  modifiedBy: number;
 
   @Column({ name: 'isactive', default: true })
   isActive: boolean;

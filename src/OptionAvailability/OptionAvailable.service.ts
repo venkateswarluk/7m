@@ -18,6 +18,7 @@ export class OptionAvailabilityService {
       Max(optionId) as optionId from sevenm.optionavailabilities`,
     );
     const [act] = getMaxIds;
+    console.log(act);
     const optionAvailability = {
       ...ActivityObj,
       optionAvailabilityId: act.optionavailabilityid

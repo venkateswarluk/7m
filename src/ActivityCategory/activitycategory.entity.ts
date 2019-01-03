@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, Generated } from 'typeorm';
+import { Entity, Column, PrimaryColumn, Generated } from 'typeorm';
 
 @Entity({ schema: 'sevenm', name: 'activitycategories' })
 export class ActivityCategory {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn('uuid')
   @Generated('uuid')
   id: string;
 
@@ -26,14 +26,14 @@ export class ActivityCategory {
 
   @Column({
     name: 'createdby',
-    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+    default: '0a6e477f-d6ce-42d8-bbed-825eda37372e',
   })
   @Generated('uuid')
   createdBy: string;
 
   @Column({
     name: 'modifiedby',
-    default: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
+    default: '0a6e477f-d6ce-42d8-bbed-825eda37372e',
   })
   @Generated('uuid')
   modifiedBy: string;

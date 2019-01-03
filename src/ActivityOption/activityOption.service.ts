@@ -13,12 +13,13 @@ export class ActivityOptionService {
   async createActivityOption(ActivityObj: ActivityOption) {
     console.log(ActivityObj);
     const getMaxIds = await this.optionRepository.query(
-      `select Max(activityOptionId) as optionId,Max(activityId) as activityId from sevenm.activityoptions`,
+      `select Max(activityOptionId) as activityOptionId,Max(activityId) as activityId from sevenm.activityoptions`,
     );
     const [act] = getMaxIds;
+    console.log({ ...act });
     const activityOption = {
       ...ActivityObj,
-      activityOptionId: act.optionid ? act.optionId + 1 : 1,
+      activityOptionId: act.activityoptionid ? act.activityoptionid + 1 : 1,
       activityId: act.activityid ? act.activityid + 1 : 1,
     };
 

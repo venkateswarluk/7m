@@ -20,6 +20,10 @@ export class UserService {
     return await this.userRepository.save(userObj);
   }
 
+  async findOneByEmail(email: string) {
+    return await this.userRepository.findOne({ email: `${email}` });
+  }
+
   async login(credentials: Credentials) {
     const user = await this.userRepository.findOne({
       email: credentials.email,

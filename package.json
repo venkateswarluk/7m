@@ -21,7 +21,9 @@
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/jwt": "^0.2.1",
     "@nestjs/microservices": "^5.4.0",
+    "@nestjs/passport": "^5.1.0",
     "@nestjs/testing": "^5.4.0",
     "@nestjs/typeorm": "^5.2.2",
     "@nestjs/websockets": "^5.4.0",
@@ -30,6 +32,8 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "tcomb": "^3.2.29",
+    "tcomb-validation": "^3.4.1",
     "typeorm": "^0.2.9",
     "uuid": "^3.3.2"
   },

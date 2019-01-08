@@ -1,28 +1,25 @@
 import { Entity, Column, PrimaryColumn, Generated } from 'typeorm';
 
-@Entity({ schema: 'sevenm', name: 'activities' })
-export class Activity {
+@Entity({ schema: 'sevenm', name: 'mealtypes' })
+export class MealType {
   @PrimaryColumn('uuid')
   @Generated('uuid')
   id: string;
 
-  @Column('text', { name: 'activityname' })
-  activityName: string;
+  @Column('text')
+  name: string;
+
+  @Column('text')
+  types: string;
+
+  @Column('text', { name: 'imageurl' })
+  imageUrl: string;
 
   @Column('text')
   description: string;
 
   @Column('numeric')
-  stars: number;
-
-  @Column('text', { name: 'thumburl' })
-  thumbUrl: string;
-
-  @Column('int', { name: 'minchildage' })
-  minChildAge: number;
-
-  @Column('int', { name: 'maxchildage' })
-  maxChildAge: number;
+  price: number;
 
   @Column('date', {
     name: 'createdat',
@@ -52,16 +49,4 @@ export class Activity {
 
   @Column({ name: 'isactive', default: true })
   isActive: boolean;
-
-  @Column('int', { name: 'destinationid' })
-  destinationId: number;
-
-  @Column('int', { name: 'categoryid' })
-  categoryId: number;
-
-  @Column('int', { name: 'activityid' })
-  activityId: number;
-
-  @Column('int', { name: 'optionid' })
-  optionId: number;
 }

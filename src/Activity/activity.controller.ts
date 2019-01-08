@@ -45,13 +45,13 @@ export class ActivityController {
     //   createActivityCategory.category,
     // );
     const d = await this.activityDetailService.createActivityDetail(
-      createActivityCategory.details,
+      createActivityCategory.activityDetails,
     );
     const o = await this.activityOptionService.createActivityOption(
-      createActivityCategory.option,
+      createActivityCategory.activityOptions,
     );
     const oa = await this.optionAvailabilityService.createOptionAvailability(
-      createActivityCategory.availability,
+      createActivityCategory.optionAvailabilities,
     );
 
     return 'a';

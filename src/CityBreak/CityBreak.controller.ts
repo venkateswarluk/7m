@@ -3,6 +3,7 @@ import { CityBreakService } from './CityBreak.service';
 import { CityBreakDetailsService } from './CityBreakDetails.service';
 import { CityBreakInclusionService } from './CityBreakInclusion.service';
 import { CityBreakExclusionService } from './CityBreakExclusion.service';
+import { CityBreakLocationService } from './CityBreakLocation.service';
 import { CityBreak } from './CityBreak.entity';
 import { CityBreakDetail } from './CityBreakDetails.entity';
 import { CityBreakInclusion } from './CityBreakInclusion.entity';
@@ -28,6 +29,7 @@ export class CityBreakController {
     private readonly cityBreakDetailsService: CityBreakDetailsService,
     private readonly cityBreakInclusionService: CityBreakInclusionService,
     private readonly cityBreakExclusionService: CityBreakExclusionService,
+    private readonly cityBreakLocationService: CityBreakLocationService,
   ) {}
 
   @Get()
@@ -40,7 +42,12 @@ export class CityBreakController {
   async create(@Body() createCityBreak: CityBreakReq) {
     const validRes = validateRequest(createCityBreak, CityBreakCreateRequest);
     if (validRes.isValid) {
-      await this.cityBreakService.create(createCityBreak);
+      const getCity = await this.cityBreakLocationService.findByCityId(
+        createCityBreak.cityId,
+      );
+      const createObj = { ...createCityBreak, city: getCity.city };
+
+      await this.cityBreakService.create(createObj);
     } else {
       return validRes.errors;
     }

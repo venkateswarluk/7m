@@ -1,22 +1,19 @@
 import { Entity, Column, PrimaryColumn, Generated } from 'typeorm';
 
-@Entity({ name: 'citybreakdetails' })
-export class CityBreakDetail {
+@Entity({ name: 'citybreaklocations' })
+export class CityBreakLocation {
   @PrimaryColumn('uuid')
   @Generated('uuid')
   id: string;
 
+  @Column('text')
+  city: string;
+
+  @Column('text')
+  country: string;
+
   @Column('int', { name: 'cityid' })
   cityId: number;
-
-  @Column('int')
-  days: number;
-
-  @Column('int', { name: 'dayno' })
-  dayNo: number;
-
-  @Column('text', { name: 'dayinfo' })
-  dayInfo: string;
 
   @Column('date', {
     name: 'createdat',

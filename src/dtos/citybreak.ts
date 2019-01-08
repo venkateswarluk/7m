@@ -14,7 +14,7 @@ export const CityBreakDetailsRequest: t.Struct<{}> = t.struct({
   cityId: t.Integer,
   days: t.Integer,
   dayNo: t.Integer,
-  description: t.String,
+  dayInfo: t.String,
 });
 
 export const CityBreakInclusionRequest: t.Struct<{}> = t.struct({
@@ -54,4 +54,10 @@ export interface CityBreakInclusionReq {
 export interface CityBreakExclusionReq {
   readonly cityId: number;
   readonly exclusions: string;
+}
+
+export interface CityBreakLocationReq {
+  readonly city: string;
+  readonly country: string;
+  readonly cityId: number;
 }

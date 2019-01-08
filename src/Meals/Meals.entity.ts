@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, Generated } from 'typeorm';
 
-@Entity({ schema: 'sevenm', name: 'mealtypes' })
+@Entity({ name: 'mealtypes' })
 export class MealType {
   @PrimaryColumn('uuid')
   @Generated('uuid')
@@ -9,8 +9,8 @@ export class MealType {
   @Column('text')
   name: string;
 
-  @Column('text')
-  types: string;
+  @Column('text', { name: 'mealtype' })
+  mealType: string;
 
   @Column('text', { name: 'imageurl' })
   imageUrl: string;
@@ -20,6 +20,9 @@ export class MealType {
 
   @Column('numeric')
   price: number;
+
+  @Column('text')
+  items: string[];
 
   @Column('date', {
     name: 'createdat',

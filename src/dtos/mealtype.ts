@@ -2,10 +2,11 @@ import * as t from 'tcomb';
 
 export const MealTypeCreateRequest: t.Struct<{}> = t.struct({
   name: t.String,
-  types: t.String,
+  mealType: t.String,
   imageUrl: t.String,
   description: t.String,
   price: t.Number,
+  items: t.String,
 });
 
 export interface MealtypeReq {
@@ -14,4 +15,5 @@ export interface MealtypeReq {
   readonly imageUrl: string;
   readonly description: string;
   readonly price: number;
+  readonly items: string | string[];
 }

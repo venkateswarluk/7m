@@ -15,11 +15,19 @@ export class MealTypeController {
     return this.mealService.findAll();
   }
 
-  @Post('/mealType')
+  @Post('/mealtype')
   async create(@Body() createMealType: MealtypeReq) {
     const validRes = validateRequest(createMealType, MealTypeCreateRequest);
+    console.log(validRes);
     if (validRes.isValid) {
-      await this.mealService.create(createMealType);
+      const mealObj = {
+        ...createMealType,
+        items:
+          typeof createMealType.items === 'string'
+            ? createMealType.items.split(',')
+            : [],
+      };
+      await this.mealService.create(mealObj);
     } else {
       return validRes.errors;
     }

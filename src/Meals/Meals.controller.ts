@@ -22,10 +22,7 @@ export class MealTypeController {
     if (validRes.isValid) {
       const mealObj = {
         ...createMealType,
-        items:
-          typeof createMealType.items === 'string'
-            ? createMealType.items.split(',')
-            : [],
+        items: createMealType.items.split(','),
       };
       await this.mealService.create(mealObj);
     } else {

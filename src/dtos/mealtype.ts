@@ -15,5 +15,14 @@ export interface MealtypeReq {
   readonly imageUrl: string;
   readonly description: string;
   readonly price: number;
-  readonly items: string | string[];
+  readonly items: string;
+}
+
+export interface MealtypeReq1 {
+  readonly name: string;
+  readonly types: string;
+  readonly imageUrl: string;
+  readonly description: string;
+  readonly price: number;
+  readonly items: string[];
 }

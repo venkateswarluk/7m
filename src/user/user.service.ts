@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { Credentials } from '../dtos/credentials';
+import * as uuid from 'uuid';
 
 @Injectable()
 export class UserService {
@@ -21,6 +22,10 @@ export class UserService {
 
   async findOneByEmail(email: string) {
     return await this.userRepository.findOne({ email: `${email}` });
+  }
+
+  async findOneById(id: any) {
+    return await this.userRepository.findOne({ id: id });
   }
 
   async login(credentials: Credentials) {

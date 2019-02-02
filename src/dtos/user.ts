@@ -7,3 +7,11 @@ export const UserCreateRequest: t.Struct<{}> = t.struct({
   roles: t.maybe(t.Array),
   role: t.String,
 });
+
+export interface UserRes {
+  readonly id: any;
+  readonly email: string;
+  readonly password: string;
+  readonly emailConfirmed: boolean;
+  readonly role: string;
+}

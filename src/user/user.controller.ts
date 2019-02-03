@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, UseGuards, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  UseGuards,
+  Param,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 
@@ -26,13 +35,15 @@ export class UserController {
   @Get(':id')
   async findById(@Param() params: any): Promise<UserRes> {
     const getUser = await this.userService.findOneById(params.id);
-    return {
-      id: getUser.id,
-      email: getUser.email,
-      password: getUser.password,
-      emailConfirmed: getUser.emailConfirmed,
-      role: getUser.role,
-    };
+    if (getUser) {
+      return {
+        id: getUser.id,
+        email: getUser.email,
+        password: getUser.password,
+        emailConfirmed: getUser.emailConfirmed,
+        role: getUser.role,
+      };
+    }
   }
 
   @Post()
@@ -43,5 +54,20 @@ export class UserController {
     } else {
       return validRes.errors;
     }
+  }
+
+  @Put(':id')
+  async update(@Param('id') id, @Body() updateCatDto) {
+    const validRes = validateRequest(updateCatDto, UserCreateRequest);
+    if (validRes.isValid) {
+      await this.userService.update(id, updateCatDto);
+    } else {
+      return validRes.errors;
+    }
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id) {
+    await this.userService.destroy(id);
   }
 }

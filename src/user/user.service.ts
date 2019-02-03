@@ -25,7 +25,11 @@ export class UserService {
   }
 
   async findOneById(id: any) {
-    return await this.userRepository.findOne({ id: id });
+    console.log(await this.userRepository.findOne({ id: id }));
+    const user = await this.userRepository.findOne({ id: id });
+    if (user) {
+      return user;
+    }
   }
 
   async login(credentials: Credentials) {
@@ -39,5 +43,23 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async update(id: any, userObj: User) {
+    const user = await this.userRepository.findOne({ id: id });
+
+    const updateUser = await this.userRepository.update(id, {
+      email: userObj.email,
+      password: userObj.password,
+      emailConfirmed: userObj.emailConfirmed,
+      roles: userObj.roles ? userObj.roles : [''],
+      role: userObj.role,
+    });
+    return { updated: true };
+  }
+
+  async destroy(id: any) {
+    const deleteUser = await this.userRepository.delete({ id });
+    return { deleted: true };
   }
 }
